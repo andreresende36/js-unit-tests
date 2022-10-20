@@ -10,7 +10,39 @@
     - average([1, 1]) // Retorno: 1;
     - average([1, '2']) // Retorno: undefined;
 */
+const verifyOnlyNumbersArray = (array) => {
+  let notNumber = 0;
+  array.forEach((element) => {
+    if (typeof element !== 'number') {
+      notNumber += 1;
+    }
+  });
+  if (notNumber !== 0) {
+    throw new Error(null);
+  }
+};
 
-const average = () => {};
+const verifyEmptyArray = (array) => {
+  if (array.length === 0) {
+    throw new Error(null);
+  }  
+};
 
+const average = (array) => {
+  let sum = 0;
+  let averagePrint = 0;
+  try {
+    verifyEmptyArray(array);
+    verifyOnlyNumbersArray(array);
+    array.forEach((element) => {
+      sum += element;
+    });
+    averagePrint = Number((sum / array.length).toFixed());
+    return averagePrint;
+    // return `${averagePrint} é do tipo ${typeof averagePrint}`;
+  } catch (e) {
+    // return error;
+  }
+};
+console.log(average([1, 2, 3, '4', 5]));
 module.exports = average;
