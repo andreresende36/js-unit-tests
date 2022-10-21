@@ -58,6 +58,48 @@
 //  { fetchMenu: () => objetoPassadoPorParametro }.
 //
 // Agora faça o TESTE 4 no arquivo `tests/restaurant.spec.js`.
+// function createMenu(object) {
+//   return { fetchMenu: () => object, consumption: [] };
+// }
+let restaurant = {};
+
+const orderFromMenu = (request) => {
+  restaurant.consumption.push(request); 
+};
+
+const bill = () => {
+  let billCheck = 0;
+  const arrayConsumption = restaurant.consumption;
+  const values = Object.values(restaurant.fetchMenu());
+  arrayConsumption.forEach((element) => {
+    for (let i = 0; i < values.length; i += 1) {
+      if (element in values[i]) {
+        billCheck += values[i][element];
+      }
+    }
+  });
+  // console.log(parseFloat(billCheck.toPrecision(3)));
+  return parseFloat(billCheck.toPrecision(3));
+};
+
+const createMenu = (myMenu) => {
+  restaurant = {
+    fetchMenu: () => myMenu,
+    consumption: [],
+    order: orderFromMenu,
+    pay: bill,
+  };
+  return restaurant;  
+};
+
+const object = { comidas: { 'batata frita': 10.90, 'croquete': 18.90 }, bebidas: { 'agua': 2.50, 'refrigerante': 4.00, 'suco': 4.50 } };
+
+const objetoRetornado = createMenu(object);
+objetoRetornado.order('batata frita');
+objetoRetornado.order('croquete');
+objetoRetornado.order('batata frita');
+objetoRetornado.pay();
+
 
 //------------------------------------------------------------------------------------------
 
@@ -92,7 +134,5 @@
 // - fará a soma do preço desses itens;
 // - retornará o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
-
-const createMenu = () => {};
 
 module.exports = createMenu;
