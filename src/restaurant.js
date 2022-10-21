@@ -92,15 +92,6 @@ const createMenu = (myMenu) => {
   return restaurant;  
 };
 
-const object = { comidas: { 'batata frita': 10.90, 'croquete': 18.90 }, bebidas: { 'agua': 2.50, 'refrigerante': 4.00, 'suco': 4.50 } };
-
-const objetoRetornado = createMenu(object);
-objetoRetornado.order('batata frita');
-objetoRetornado.order('croquete');
-objetoRetornado.order('batata frita');
-objetoRetornado.pay();
-
-
 //------------------------------------------------------------------------------------------
 
 // PASSO 2: Adicione ao objeto retornado por `createMenu()` uma chave de nome `consumption` que, como valor inicial, tem um array vazio.
